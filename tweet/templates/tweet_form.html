@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {% if form.instance.pk %}Edit Tweet{% else %}Create Tweet{% endif %} - My Tweet App
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card bg-secondary text-white shadow">
+            <div class="card-header border-bottom border-dark bg-dark">
+                <h3 class="card-title mb-0">
+                    {% if form.instance.pk %}Edit Your Tweet{% else %}Create New Tweet{% endif %}
+                </h3>
+            </div>
+            <div class="card-body p-4">
+                <!-- enctype is required if your tweet model handles image files -->
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        {{ form.as_p }}
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="submit" class="btn btn-warning fw-bold px-4">Save Tweet</button>
+                        <a href="{% url 'tweet_list' %}" class="btn btn-outline-light">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

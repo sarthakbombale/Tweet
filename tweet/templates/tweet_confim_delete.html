@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Delete Tweet - My Tweet App
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card border-danger bg-secondary text-white shadow">
+            <div class="card-header bg-danger text-white py-3">
+                <h4 class="card-title mb-0 fw-bold">⚠️ Warning: Delete Action</h4>
+            </div>
+            <div class="card-body p-4 text-center">
+                <p class="fs-5">Are you absolutely sure you want to permanently delete this tweet?</p>
+                
+                <div class="bg-dark p-3 rounded mb-4 text-start border-start border-warning border-3">
+                    <small class="text-warning d-block mb-1">Previewing message content:</small>
+                    <span class="fst-italic">"{{ object.text|truncatechars:100 }}"</span>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger fw-bold px-4 me-2">Yes, Confirm Delete</button>
+                    <a href="{% url 'tweet_list' %}" class="btn btn-outline-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
