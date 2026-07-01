@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Tweet
 from .forms import TweetForm  # Make sure you have a form class in forms.py
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login as auth_login
 
 # 1. Main Application Landing Page
 def index(request):
@@ -49,3 +51,17 @@ def tweet_delete(request, tweet_id):
         tweet.delete()
         return redirect('tweet_list')
     return render(request, 'tweet_confirm_delete.html', {'object': tweet})
+
+
+# Simple registration view using Django's UserCreationForm
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # log the user in after successful registration
+            auth_login(request, user)
+            return redirect('tweet_list')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})

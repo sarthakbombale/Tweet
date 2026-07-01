@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    Login - My Tweet App
+    Register - My Tweet App
 {% endblock %}
 
 {% block content %}
 <div class="row justify-content-center mt-5">
-    <div class="col-md-5">
+    <div class="col-md-6">
         <div class="card bg-secondary text-white shadow">
             <div class="card-header bg-dark">
-                <h3 class="mb-0">Login</h3>
+                <h3 class="mb-0">Create Account</h3>
             </div>
             <div class="card-body">
                 <form method="post">
@@ -17,17 +17,14 @@
                     {% if form.errors %}
                         <div class="alert alert-danger">Please correct the errors below.</div>
                     {% endif %}
+
                     <div class="mb-3">
-                        <label for="id_username" class="form-label">Username</label>
-                        {{ form.username }}
+                        {{ form.as_p }}
                     </div>
-                    <div class="mb-3">
-                        <label for="id_password" class="form-label">Password</label>
-                        {{ form.password }}
-                    </div>
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-warning">Login</button>
-                        <a href="{% url 'register' %}" class="btn btn-outline-light">Register</a>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="submit" class="btn btn-warning">Register</button>
+                        <a href="{% url 'login' %}" class="btn btn-outline-light">Already have an account?</a>
                     </div>
                 </form>
             </div>

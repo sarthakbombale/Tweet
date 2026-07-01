@@ -36,16 +36,22 @@
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0 me-3">
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <form method="post" action="{% url 'logout' %}" class="d-flex m-0">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-link nav-link text-decoration-none">Logout</button>
-                        </form>
-                    </li>
+                        <li class="nav-item">
+                            <span class="nav-link">Hello, {{ user.username }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <form method="post" action="{% url 'logout' %}" class="d-flex m-0">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link nav-link text-decoration-none">Logout</button>
+                            </form>
+                        </li>
                     {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>
