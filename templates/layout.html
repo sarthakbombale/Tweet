@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Stable Bootstrap 5.3.3 CSS -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link href="https://jsdelivr.net" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>
         {% block title %}
         Chai Aur Django
@@ -21,8 +21,8 @@
         <div class="container">
             <a class="navbar-brand fw-bold text-warning" href="{% url 'index' %}">Chai Aur Django</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -31,13 +31,23 @@
                         <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Tweets</a>
+                        <a class="nav-link" href="{% url 'tweet_list' %}">Tweets</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search tweets..." aria-label="Search" />
-                    <button class="btn btn-warning" type="submit">Search</button>
-                </form>
+                <ul class="navbar-nav mb-2 mb-lg-0 me-3">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}" class="d-flex m-0">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link text-decoration-none">Logout</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </nav>
@@ -49,7 +59,9 @@
     </div>
 
     <!-- Required Bootstrap JS Bundle for Dropdowns & Mobile Toggles -->
-    <script src="https://jsdelivr.net"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3c7vy3z29KfG5pEcNqcZJRv3YyAyNx5uXPvtg8JmYxLAsY7DhjT8oVf3I9f2y8x"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
